@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: Session
       value: 
       objectReference: {fileID: 875465701}
+    - target: {fileID: 114173052960610352, guid: 101470908697ddd4b990d38f78a6977b, type: 3}
+      propertyPath: ActivateDebugLog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 101470908697ddd4b990d38f78a6977b, type: 3}
 --- !u!4 &513419696 stripped
@@ -727,7 +731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
       propertyPath: Ids.Array.data[0].Id
-      value: gameData
+      value: Cube
       objectReference: {fileID: 0}
     - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
       propertyPath: Ids.Array.data[0].Framerate
@@ -756,6 +760,10 @@ PrefabInstance:
     - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
       propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DataStream, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Cube
       objectReference: {fileID: 0}
     - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
       propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

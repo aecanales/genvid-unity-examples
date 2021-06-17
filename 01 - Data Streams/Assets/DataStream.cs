@@ -17,10 +17,14 @@ public class DataStream : MonoBehaviour
     
     // We create a struct with the data we want to send so we can later serialize and send it as a JSON to our web overlay.
     [System.Serializable]
-    private struct GameData
+    public struct GameData
     {
-        [SerializeField] public Vector3 CubeRotation;
-        [SerializeField] public Color CubeColor;
+        [SerializeField] public float CubeRotationX;
+        [SerializeField] public float CubeRotationY;
+        [SerializeField] public float CubeRotationZ;
+        [SerializeField] public float CubeColorR;
+        [SerializeField] public float CubeColorG;
+        [SerializeField] public float CubeColorB;
     }
 
     // This method must be called by the GenvidStreams object to make sure that data is submitted.
@@ -31,8 +35,12 @@ public class DataStream : MonoBehaviour
         {
             // We create a GameData object with the information we want to submit.
             GameData gameData = new GameData() {
-                CubeRotation = Cube.transform.localEulerAngles,
-                CubeColor = cubeRenderer.material.color
+                CubeRotationX = Cube.transform.localEulerAngles.x,
+                CubeRotationY = Cube.transform.localEulerAngles.y,
+                CubeRotationZ = Cube.transform.localEulerAngles.z,
+                CubeColorR = cubeRenderer.material.color.r,
+                CubeColorG = cubeRenderer.material.color.g,
+                CubeColorB = cubeRenderer.material.color.b
             };
 
             // We submit the data as a data stream.
