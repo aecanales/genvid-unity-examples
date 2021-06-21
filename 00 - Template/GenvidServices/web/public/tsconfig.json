@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "target": "es6",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "outDir": "js",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "types": [
+            "jquery"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "unity.ts",
+        "genvid.d.ts",
+        "adminUnity.ts",
+        "genvid/**/*.ts"
+    ]
+}

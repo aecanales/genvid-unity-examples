@@ -1,0 +1,37 @@
+{
+  "version": "1.7.0",
+  "event": {
+    "game": {
+      "maps": [
+        {
+          "id": "dropVote",
+          "source": "userinput",
+          "where": {"key": ["dropVote"], "name": "<dropId>", "type": "number"},
+          "key": ["dropVote", "<dropId>"], "value": 1
+        },
+        {
+          "id": "cheer",
+          "source": "userinput",
+          "where": {"key": ["cheer"], "name": "<tankId>", "type": "number"},
+          "key": ["cheer", "<tankId>"], "value": 1
+        }
+      ],
+      "reductions": [
+        {
+          "id": "dropVote",
+          "where": {"key": ["dropVote", "<dropId>"]},
+          "key": ["<dropId>"],
+          "value": ["$sum"],
+          "period": 250
+        },
+        {
+          "id": "cheer",
+          "where": {"key": ["cheer", "<tankId>"]},
+          "key": ["<tankId>"],
+          "value": ["$sum"],
+          "period": 250
+        }     
+      ]
+    }
+  }
+}
