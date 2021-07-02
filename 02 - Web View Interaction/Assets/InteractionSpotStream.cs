@@ -23,6 +23,7 @@ public class InteractionSpotStream : MonoBehaviour
 
     // To test whether the bounding boxes are being correctly calculated, we have this simple
     // debug tool that draws the bounding boxes via Unity GUI.
+    // Note that the default Genvid camera does *not* capture GUI and thus this will not appear on the stream.
     void OnGUI()
     {
         if (drawDebug)
