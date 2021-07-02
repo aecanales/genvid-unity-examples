@@ -472,7 +472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef9e4953fd56d84b820e294d7e7a6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: 
+  Description: Crantor is a town situated on the western coast of the continent.
+    It is a large port town, home to hundreds of fishermen and merchants. The town
+    is large and bustling. The town has an enormous harbor, with hundreds of boats
+    bringing in goods and people every day.
 --- !u!1001 &169157998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -751,7 +754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef9e4953fd56d84b820e294d7e7a6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: 
+  Description: Bohan is a neutral good village. It is situated in a high mountain
+    valley, that is surrounded by a dense pine forest. Due to its location, the village
+    has no need for walls, as only a few people have ever made their way to the valley.
 --- !u!1 &389997351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef9e4953fd56d84b820e294d7e7a6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: 
+  Description: Penodwes is a small city, it was the capital city of the elves until
+    a few centuries ago. There were only about 1000 elves in the city. It was abandoned
+    in the past, but was resurrected a few hundred years ago.
 --- !u!1 &2107053721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,4 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef9e4953fd56d84b820e294d7e7a6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: 
+  Description: Ygese is a small village in the elven forest. It is known for its
+    rare and exotic fruits and vegetables. Among the known produce from this village
+    is the Ronek Banana. The village is home to roughly fifty elves, and fifty humans.
+    It is considered one of the more peaceful villages in the world.
