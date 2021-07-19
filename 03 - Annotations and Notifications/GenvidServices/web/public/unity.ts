@@ -82,6 +82,8 @@ namespace unityTankSample {
 
     // unityController used fo all the methods on the page
     export class UnityController {
+        myLog: HTMLDivElement;
+
         client: genvid.IGenvidClient;
         streamInfo: genvid.IStreamInfo;
         video_player: genvid.IVideoPlayer = null;
@@ -216,6 +218,8 @@ namespace unityTankSample {
             // variables init
             this.video_player = this.client.videoPlayer;
 
+            this.myLog = <HTMLDivElement> document.querySelector("#myLog");
+
             this.timeLocalDiv = <HTMLDivElement>document.querySelector("#time_local");
             this.timeVideoDiv = <HTMLDivElement>document.querySelector("#time_video");
             this.timeVideoRawDiv = <HTMLDivElement>document.querySelector("#time_video_raw");
@@ -345,22 +349,6 @@ namespace unityTankSample {
 
         // ---------------------------------------------------------Enter frame section---------------------------------------------------------
         private on_new_frame(frameSource: genvid.IDataFrame) {
-            let cubeData = JSON.parse(frameSource.streams.Cube.data);
-
-            let rotationX: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMine");
-            let rotationY: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultHealth");
-            let rotationZ: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMovement");
-            let colorR: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultAttack");
-            let colorG: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultShield");
-            let colorB: HTMLElement = <HTMLDivElement>document.querySelector("#colorB");
-            
-            rotationX.textContent = "Rotation X: " + Math.round(cubeData.CubeRotationX);
-            rotationY.textContent = "Rotation Y: " + Math.round(cubeData.CubeRotationY);
-            rotationZ.textContent = "Rotation Z: " + Math.round(cubeData.CubeRotationZ);
-            colorR.textContent = "Color R: " + Math.round(cubeData.CubeColorR * 10) / 10;
-            colorG.textContent = "Color G: " + Math.round(cubeData.CubeColorG * 10) / 10;
-            colorB.textContent = "Color B: " + Math.round(cubeData.CubeColorB * 10) / 10;
-
             let gameDataFrame = frameSource.streams["GameData"];
             let gameData: IGameData = null;            
             if (gameDataFrame && gameDataFrame.user) {
@@ -626,6 +614,13 @@ namespace unityTankSample {
                     try {
                         if (stream.id == "GameData") frame.user = <IGameData>JSON.parse(frame.data);
                         if (stream.id == "MatchState") frame.user = <IMatchStateData>JSON.parse(frame.data);
+                        if (stream.id == "annotation") {
+                            let annotation = JSON.parse(frame.data);
+                            let p = document.createElement("p");
+                            let text = document.createTextNode(`[ANNOTATION] ${annotation.Content}`);
+                            p.appendChild(text);
+                            this.myLog.appendChild(p);
+                        }
                     }
                     catch (err) {
                         console.info("invalid Json format for:" + frame.data + " with error :" + err);
@@ -648,6 +643,13 @@ namespace unityTankSample {
                     catch (err) {
                         console.info("invalid Json format for:" + datastr + " with error :" + err);
                     }
+                 }
+                 else if (notification.id === "notification") {
+                    let notificationData = JSON.parse(notification.data);
+                    let p = document.createElement("p");
+                    let text = document.createTextNode(`[NOTIFICATION] ${notificationData.Content}`);
+                    p.appendChild(text);
+                    this.myLog.appendChild(p);
                  }
              }
         }
