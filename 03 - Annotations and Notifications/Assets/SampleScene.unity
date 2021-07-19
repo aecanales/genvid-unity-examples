@@ -1052,6 +1052,82 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].Id
+      value: annotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].Id
+      value: notification
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].Framerate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].Framerate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1012794577}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1012794577}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SubmitTimeChangeAnnotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SubmitTimeChangeNotification
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ClockStreams, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ClockStreams, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[0].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+      propertyPath: Ids.Array.data[1].OnSubmitStream.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
 --- !u!114 &1012794575 stripped
@@ -1059,10 +1135,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114597555414695928, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
   m_PrefabInstance: {fileID: 1012794574}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1012794576}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45b406b6820fdb84b82956821fe43c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1012794576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1736212031247006, guid: a741ff3eb6e9a1b4c85158a6776e79cc, type: 3}
+  m_PrefabInstance: {fileID: 1012794574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012794577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012794576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d2c537b8476144aab691b292a7f8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1173680040
