@@ -22,7 +22,7 @@ config {
   local {
     binary {
       unity {
-        path = "{{env `UNITYPROJECTROOT` | js}}\\Builds\\DataStreams.exe"
+        path = "{{env `UNITYPROJECTROOT` | js}}\\Builds\\GenvidTemplate.exe"
       }
     }
   }
