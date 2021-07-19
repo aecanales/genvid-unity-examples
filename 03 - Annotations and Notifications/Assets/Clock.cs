@@ -1,8 +1,11 @@
 using UnityEngine;
 using System;
+using TMPro;
 
 public class Clock : MonoBehaviour 
 {
+    public TextMeshPro Text;
+    
     public GameObject HourHand;
     public GameObject MinuteHand;
     public GameObject SecondHand;
@@ -10,6 +13,8 @@ public class Clock : MonoBehaviour
     void Update()
     {
         DateTime now = DateTime.Now;
+
+        Text.text = now.ToString("hh:mm:ss tt");
 
         // We get the hour in a 12-hour format.
         float hour = float.Parse(now.ToString("%h"));
