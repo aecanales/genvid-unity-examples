@@ -8,23 +8,23 @@ public class ClockStreams : MonoBehaviour
         public string Content;
     }
 
-    int previousMinute;
+    int previousSecond;
     bool canSendAnnotation;
     bool canSendNotification;
     
     void Start()
     {
-        previousMinute = System.DateTime.Now.Minute;
+        previousSecond = System.DateTime.Now.Second;
     }
 
     void Update()
     {
-        int minute = System.DateTime.Now.Minute;
-        if (minute != previousMinute)
+        int second = System.DateTime.Now.Second;
+        if (second % 15 == 0 && second != previousSecond)
         {
             canSendAnnotation = true;
             canSendNotification = true;
-            previousMinute = minute;
+            previousSecond = second;
         }
     }
 
