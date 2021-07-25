@@ -82,7 +82,7 @@ namespace unityTankSample {
 
     // unityController used fo all the methods on the page
     export class UnityController {
-        myLog: HTMLDivElement;
+        myLog: HTMLParagraphElement;
 
         client: genvid.IGenvidClient;
         streamInfo: genvid.IStreamInfo;
@@ -218,7 +218,7 @@ namespace unityTankSample {
             // variables init
             this.video_player = this.client.videoPlayer;
 
-            this.myLog = <HTMLDivElement> document.querySelector("#myLog");
+            this.myLog = <HTMLParagraphElement> document.querySelector("#myLog");
 
             this.timeLocalDiv = <HTMLDivElement>document.querySelector("#time_local");
             this.timeVideoDiv = <HTMLDivElement>document.querySelector("#time_video");
@@ -349,6 +349,11 @@ namespace unityTankSample {
 
         // ---------------------------------------------------------Enter frame section---------------------------------------------------------
         private on_new_frame(frameSource: genvid.IDataFrame) {
+            if (frameSource.annotations.annotation && frameSource.annotations.annotation.length != 0) {
+                let annotation = JSON.parse(genvid.UTF8ToString(frameSource.annotations.annotation[0].rawdata));
+                this.myLog.innerHTML += `[ANNOTATION] ${annotation.Content} <br>`;
+            }
+
             let gameDataFrame = frameSource.streams["GameData"];
             let gameData: IGameData = null;            
             if (gameDataFrame && gameDataFrame.user) {
@@ -614,13 +619,6 @@ namespace unityTankSample {
                     try {
                         if (stream.id == "GameData") frame.user = <IGameData>JSON.parse(frame.data);
                         if (stream.id == "MatchState") frame.user = <IMatchStateData>JSON.parse(frame.data);
-                        if (stream.id == "annotation") {
-                            let annotation = JSON.parse(frame.data);
-                            let p = document.createElement("p");
-                            let text = document.createTextNode(`[ANNOTATION] ${annotation.Content}`);
-                            p.appendChild(text);
-                            this.myLog.appendChild(p);
-                        }
                     }
                     catch (err) {
                         console.info("invalid Json format for:" + frame.data + " with error :" + err);
@@ -646,10 +644,7 @@ namespace unityTankSample {
                  }
                  else if (notification.id === "notification") {
                     let notificationData = JSON.parse(notification.data);
-                    let p = document.createElement("p");
-                    let text = document.createTextNode(`[NOTIFICATION] ${notificationData.Content}`);
-                    p.appendChild(text);
-                    this.myLog.appendChild(p);
+                    this.myLog.innerHTML += `[NOTIFICATION] ${notificationData.Content}<br />`;
                  }
              }
         }
