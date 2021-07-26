@@ -15,5 +15,10 @@ Example of how to add interaction to the web view based on information sent from
 
 ![Web view interaction example](./img/02.gif)
 
+### 03 - Annotations and Notifications
+Example showing how to use annotations and notifications and illustrates the difference between them.  Check out the corresponding readme for the explanation.
+
+![Annotations and Notifications example](./img/03.gif)
+
 ## FAQ
 *Coming soon...*

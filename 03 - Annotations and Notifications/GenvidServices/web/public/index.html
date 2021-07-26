@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8" />
+    <title>Genvid Tanks!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/unity.js"></script>
+</head>
+
+<body ng-app="Tutorial">
+    <div class="wrap">
+        <header>
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                     <a class="logo navbar-brand" href="/"></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Play</a></li>
+                            <li><a href="/admin">Admin</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="genvid_overlay_button"><img src="img/genvid_overlay.svg" alt="Genvid Overlay" class="clickable"/></a></li>
+                            <li><a id="help_button" class="clickable">?</a></li>
+                        </ul>
+                    </div>
+                </div>
+        </header>
+        <div class="main">
+            <div>
+                <div id="help_overlay">
+                    <h2>Unity Tank Tutorial Sample Help</h2>
+                    <p>The tutorial tank sample application is streamed directly into this window. Tanks are controlled by separate players. The first tank to score 5 points wins.  On the webpage, viewers can select a tank to learn more about it, cheer for their favorite tank and help influence the battle by voting on loot drops.  Viewers cam also toggle a map mode that will display a 2d view of the battle field.</p>
+                    <table id="table_help">
+                        <tr>
+                            <th colspan="2">Global</th>
+                            <th colspan="2">Video</th>
+                            <th colspan="2">Bottom panels</th>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td>Mute or unmute the stream</td>
+                            <td>Click on tank</td>
+                            <td>View tank stats and highlight</td>
+                            <td>Click 👍</td>
+                            <td>Change player popularity (floating hearts)</td>
+                        </tr>
+                        <tr>
+                            <td>Z</td>
+                            <td>Reduce volume of the stream</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>X</td>
+                            <td>Increase volume of the stream</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Space</td>
+                            <td>Pause or unpause the stream</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>+</td>
+                            <td>Increase the DelayOffset</td>
+                            <th colspan="2">Header Buttons</th>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>Decrease the DelayOffset</td>
+                            <td class="help_header">Play</td>
+                            <td>Return to the interactive video player</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>*</td>
+                            <td>Reset the DelayOffset</td>
+                            <td class="help_header">Admin</td>
+                            <td>Access the admin page (u: admin p: admin)</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>G</td>
+                            <td>Show or hide the Genvid overlay</td>
+                            <td><img id="help_genvid_overlay_button" src="img/genvid_overlay.svg"></td>
+                            <td>Show or hide the Genvid overlay</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>H</td>
+                            <td>Open or close the help menu</td>
+                            <td class="help_header">?</td>
+                            <td>Open or close the help menu</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="roundInfo">
+                <span id='topText'>Blue tank wins the round!</span>
+                </br></br>
+                <span id='score1'>Blue Tank: 1 win</span>
+                <span id='score2'>Red Tank: 0 wins</span>
+            </div>
+
+            <div class="video-chat">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 col-lg-12">
+                        <div id="video_area">
+                            <div id="genvid_overlay" class="invisible_div">
+                                <div id="video_overlay">
+
+                                    <canvas id="canvas_overlay_3d"></canvas>
+                                    
+                                    <div id='map_overlay' class="mapContainer">  
+                                        <canvas id="canvas_overlay_2d"></canvas>
+                                    </div>
+
+                                    <div id="mouse_overlay">
+                                   
+                                        <!--
+                                        <div class="mapButtonContainer">
+                                            <button id='ToggleMap'>Toggle Map</button>
+                                        </div>
+                                        -->
+
+
+                                        <div class="topContainer">
+                                            <!--
+                                            <span id='lootDropTimer' class='topContainerTimer'>Next loot drop: 0 seconds</span>
+                                            -->
+                                            <div id='voteInfoPanel'>
+                                                
+                                                <div class='elem'>
+                                                    <!--<span id='voteResultMine'>Rotation X: 0</span>-->
+                                                    <!--<span><button id='VoteMine'>Vote for Mine</button></span>-->
+                                                </div>
+
+                                                <div class='elem'>
+                                                    <!--<span id='voteResultHealth'>Rotation Y: 0</span>-->
+                                                    <!--<span><button id='VoteHealth'>Vote for Health</button></span>-->
+                                                </div>
+
+                                                
+                                                <div class='elem'>
+                                                    <!--<span id='voteResultMovement'>Rotation Z: 0</span>-->
+                                                    <!--<span><button id='VoteMovement'>Vote for Mobility</button></span>-->
+                                                </div>
+                                                
+
+                                                <div class='elem'>
+                                                    <!--<span id='voteResultAttack'>Color R: 0</span>-->
+                                                    <!--<span><button id='VoteAttack'>Vote for Attack</button></span>-->
+                                                </div>
+
+                                                <div class='elem'>
+                                                    <!--<span id='voteResultShield'>Color G: 0</span>-->
+                                                    <!--<span><button id='VoteShield'>Vote for Shield</button></span>-->
+                                                </div>
+
+                                                <div class='elem'>
+                                                    <!--<span id='colorB'>Color B: 0</span>-->
+                                                    <!--<span><button id='VoteShield'>Vote for Shield</button></span>-->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="container nopadding">
+                                            <div class="left" id="leftTankPanel"></div>
+                                            <div class="middle"></div>
+                                            <div class="right" id="rightTankPanel"></div>
+                                        </div>
+
+                                        <div id='mute-button'>
+                                            <i class="fa fa-lg" aria-hidden="true"></i>
+                                        </div>
+                                        <div class='fullscreen-button'>
+                                            <i class="fa fa-expand fa-lg" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div id="prompt_overlay"></div>
+                                    <div id="timeCamScene_overlay"></div>
+                                </div>
+                                <div id="info_overlay">
+                                    <div id="time_local"></div>
+                                    <div id="time_video_raw"></div>
+                                    <div id="time_video"></div>
+                                    <div id="time_compose_last"></div>
+                                    <div id="time_compose"></div>
+                                    <div id="time_stream"></div>
+                                    <div id="latency"></div>
+                                    <div id="delay_offset"></div>
+                                </div>
+                            </div>
+                            <!--this will contain the video stream !-->
+                            <div id="video_player"></div>
+                            <p id="myLog"></p>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="footer-info">
+                        <p>This Genvid SDK Demo Website and the functionality exhibited is Proprietary &amp; Confidential, 2016-2020 Genvid Technologies Inc. All Rights Reserved.</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="footer-info">
+                        <div class="text-right">
+                            <a href="https://www.genvidtech.com/">Genvid Technologies</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
