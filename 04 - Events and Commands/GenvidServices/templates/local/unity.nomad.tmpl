@@ -1,0 +1,34 @@
+job "unity" {
+  datacenters = [
+	# {{range $i, $dc := datacenters}}
+	"{{$dc}}",
+	# {{end}}
+  ]
+
+  task "unity" {
+    driver = "raw_exec"
+
+    config {
+      command = "{{key `local/binary/unity/path` | js}}"
+      args = [
+    "-Genvid",
+    "-screen-quality Ultra",
+		"-force-d3d11",
+		"-logFile",
+		"${NOMAD_ALLOC_DIR}/logs/unity.log",
+		"-screen-height",
+		"{{- keyOrDefault `genvid/encode/input/height` `720` -}}",
+		"-screen-width",
+		"{{- keyOrDefault `genvid/encode/input/width` `1280` -}}",
+      ]
+    }
+
+    resources {
+    }
+
+    env {
+	  CONSUL_HTTP_ADDR = "{{ print (env `GENVID_DEFAULT_IP`) `:8500` }}"
+      GLOG_logtostderr = "1"
+    }
+  }
+}
