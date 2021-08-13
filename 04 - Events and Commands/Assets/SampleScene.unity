@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &42040658
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -368,6 +369,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].Id
+      value: click
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 169158001}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BugEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
 --- !u!114 &169157999 stripped
@@ -375,12 +412,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
   m_PrefabInstance: {fileID: 169157998}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 169158000}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 863f108033eca074392da08683d99456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &169158000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1930838573799504, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+  m_PrefabInstance: {fileID: 169157998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &169158001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169158000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20cc9ad2eba62924cbf3d9810a81c1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BugContainer: {fileID: 1195330742}
 --- !u!1 &385649464
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &385649467
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -548,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &401018199
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -670,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &502550149
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1027,6 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &738060379
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1433,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &1036626997
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1606,6 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!61 &1098164730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1720,6 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &1262382538
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1910,6 +1972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &1322378462
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2032,6 +2095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &1509262354
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2172,6 +2236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &1687412793
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2376,6 +2441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &2102567811
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2498,6 +2564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2f52c3624e7134b80a0e53b2487f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
 --- !u!212 &2123090744
 SpriteRenderer:
   m_ObjectHideFlags: 0

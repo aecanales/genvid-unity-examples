@@ -5,6 +5,14 @@ import * as genvidMath from "genvid-math";
 namespace unityTankSample {
 
     // ------------------------------------------------class/interface defines------------------------------------------------
+    export interface BoundingBox {
+        X: number;
+        Y: number;
+        Width: number;
+        Height: number;
+        ID: number;
+    }
+    
     // Conversion from Json data into structure for a specific tank
     export interface ITankData {
         id: number;
@@ -82,6 +90,8 @@ namespace unityTankSample {
 
     // unityController used fo all the methods on the page
     export class UnityController {
+        bugs: Array<BoundingBox>;
+
         client: genvid.IGenvidClient;
         streamInfo: genvid.IStreamInfo;
         video_player: genvid.IVideoPlayer = null;
@@ -296,6 +306,28 @@ namespace unityTankSample {
                 this.onMute();
             }
 
+            const isInBounds = (spot, click) => {
+                return spot.X <= click.X && click.X <= spot.X + spot.Width &&
+                       spot.Y <= click.Y && click.Y <= spot.Y + spot.Height;
+            };
+            
+            // Returns the click relative to the mouseOverlay div (instead of relative to the entire DOM).
+            const relativeClickPosition = (click) => {
+                const rect = this.mouseOverlay.getBoundingClientRect();
+                return {X: click.pageX - rect.x, Y: click.pageY - rect.y}
+            };
+            
+            this.mouseOverlay.addEventListener("click", (event) => { 
+                if (this.bugs) {
+                    this.bugs.forEach(bug => {
+                        if (isInBounds(bug, relativeClickPosition(event))) {
+                            console.log(`Clicked on ${bug.ID}`);
+                            this.client.sendEventObject({'click': bug.ID});
+                        }
+                    });
+                }
+            });
+
             /*
             let mineButton = <HTMLButtonElement>document.querySelector("#VoteMine");
             mineButton.addEventListener("click", (_event) => { this.onVote(0); }, false);
@@ -345,21 +377,7 @@ namespace unityTankSample {
 
         // ---------------------------------------------------------Enter frame section---------------------------------------------------------
         private on_new_frame(frameSource: genvid.IDataFrame) {
-            let cubeData = JSON.parse(frameSource.streams.Cube.data);
-
-            let rotationX: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMine");
-            let rotationY: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultHealth");
-            let rotationZ: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMovement");
-            let colorR: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultAttack");
-            let colorG: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultShield");
-            let colorB: HTMLElement = <HTMLDivElement>document.querySelector("#colorB");
-            
-            rotationX.textContent = "Rotation X: " + Math.round(cubeData.CubeRotationX);
-            rotationY.textContent = "Rotation Y: " + Math.round(cubeData.CubeRotationY);
-            rotationZ.textContent = "Rotation Z: " + Math.round(cubeData.CubeRotationZ);
-            colorR.textContent = "Color R: " + Math.round(cubeData.CubeColorR * 10) / 10;
-            colorG.textContent = "Color G: " + Math.round(cubeData.CubeColorG * 10) / 10;
-            colorB.textContent = "Color B: " + Math.round(cubeData.CubeColorB * 10) / 10;
+            this.bugs = JSON.parse(frameSource.streams.bugs.data).BoundingBoxes;
 
             let gameDataFrame = frameSource.streams["GameData"];
             let gameData: IGameData = null;            

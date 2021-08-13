@@ -6,7 +6,7 @@ public class Bug : MonoBehaviour
     // To be able to identify which bug the viewers have clicked, we assign each bug a unique id.
     // To do that, we use a static variable which is shared between all instances of Bug.
     private static int ID_COUNTER = 0;
-    private int id;
+    public int Id;
     
     private Vector3 startingPosition;
     private Vector3 finalPosition;
@@ -16,7 +16,7 @@ public class Bug : MonoBehaviour
 
     void Start()
     {
-        id = ID_COUNTER;
+        Id = ID_COUNTER;
         ID_COUNTER++;
         
         // We use Random to calculate the final position and a speed modifier.
@@ -46,7 +46,7 @@ public class Bug : MonoBehaviour
         // WorldToScreenPoint places (0,0) in the bottom left of the screen, whereas the web view
         // places (0,0) in the *top* left, so we must transform the Y.
         return new BoundingBox() {
-            ID = id,
+            ID = Id,
             X = bottomLeft.x,
             Y = Screen.height - topRight.y,
             Width = topRight.x - bottomLeft.x,
