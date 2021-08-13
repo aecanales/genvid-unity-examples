@@ -20,5 +20,9 @@ Example showing how to use annotations and notifications and illustrates the dif
 
 ![Annotations and Notifications example](./img/03.gif)
 
+### 04 - Events and Commands
+Example that shows how to send player input from the web view to the game via events and commands.
+![Events and Commands example](./img/04.gif)
+
 ## FAQ
 *Coming soon...*
