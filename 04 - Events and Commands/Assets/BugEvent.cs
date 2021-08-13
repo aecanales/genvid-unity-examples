@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using GenvidSDKCSharp;
 
+// Recieves the event when a player clicks on a bug and deactivates the corresponding bug.
 public class BugEvent : MonoBehaviour 
 {
     public GameObject BugContainer;
@@ -25,6 +26,7 @@ public class BugEvent : MonoBehaviour
         return new Bug();
     }
     
+    // Called by the GenvidEvents game object when a "click" event is recieved.
     public void OnClickEvent(string eventId, GenvidSDK.EventResult[] results, int numResult, IntPtr userData)
     {
         // We get the ID of the bug the player just clicked on and disable it if active. 

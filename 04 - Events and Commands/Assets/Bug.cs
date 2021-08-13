@@ -35,6 +35,19 @@ public class Bug : MonoBehaviour
         transform.position = Vector3.Lerp(startingPosition, finalPosition, pingPong);
     }
 
+    // The bounding box gives us information on the clickable region of this interaction spot in 
+    // *screen coordinates*.
+    [System.Serializable]
+    public struct BoundingBox
+    {
+        [SerializeField] public int ID;
+        // The X and Y correspond to the top left corner of the box.
+        [SerializeField] public float X;
+        [SerializeField] public float Y;
+        [SerializeField] public float Width;
+        [SerializeField] public float Height;
+    }      
+    
     public BoundingBox GetBoundingBox()
     {
         Bounds bounds = boxCollider2D.bounds;
@@ -52,18 +65,5 @@ public class Bug : MonoBehaviour
             Width = topRight.x - bottomLeft.x,
             Height = topRight.y - bottomLeft.y,
         };
-    } 
-
-    // The bounding box gives us information on the clickable region of this interaction spot in 
-    // *screen coordinates*.
-    [System.Serializable]
-    public struct BoundingBox
-    {
-        [SerializeField] public int ID;
-        // The X and Y correspond to the top left corner of the box.
-        [SerializeField] public float X;
-        [SerializeField] public float Y;
-        [SerializeField] public float Width;
-        [SerializeField] public float Height;
-    }    
+    }   
 }

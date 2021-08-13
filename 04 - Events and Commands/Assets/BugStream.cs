@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Sends the bounding boxes of each bug so that the web view player can click on them.
 public class BugStream : MonoBehaviour
 {
     public GameObject BugContainer;
