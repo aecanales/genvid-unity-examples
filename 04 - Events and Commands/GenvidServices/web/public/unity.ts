@@ -12,6 +12,11 @@ namespace unityTankSample {
         Height: number;
         ID: number;
     }
+
+    interface ICommandRequest {
+        id: string;
+        value: string;
+    }    
     
     // Conversion from Json data into structure for a specific tank
     export interface ITankData {
@@ -327,6 +332,22 @@ namespace unityTankSample {
                     });
                 }
             });
+
+            let restartButton = <HTMLButtonElement>document.querySelector("#restart_game_button");
+            restartButton.addEventListener("click", (_event) => { 
+                let command: ICommandRequest = {
+                    id: "RestartMatch",
+                    value: "null"
+                }; 
+                
+                let promise = $.post("/api/admin/commands/game", command).then(() => {
+                    console.log("Game has been restarted.");
+                });
+    
+                promise.fail((err) => {
+                    console.error(`Failed to send command: ${err}`)
+                });
+            }, false);
 
             /*
             let mineButton = <HTMLButtonElement>document.querySelector("#VoteMine");
