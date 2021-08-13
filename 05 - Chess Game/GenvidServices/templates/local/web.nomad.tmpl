@@ -1,0 +1,54 @@
+job "web" {
+  datacenters = [
+	# {{range $i, $dc := datacenters}}
+	"{{$dc}}",
+	# {{end}}
+  ]
+
+  task "web" {
+	driver = "raw_exec"
+
+	config = {
+	  command = "{{key `local/binary/node/path` | js}}"
+	  args = ["{{key `local/website/script` | js}}"]
+	}
+
+    vault {
+      policies = ["genvid"]
+    }
+	env {
+	  WWWROOT = "{{key `local/website/root` | js}}"
+      # {{with secret `secret/disco` }}
+      GENVID_DISCO_SECRET = "{{ .Data.GENVID_DISCO_SECRET }}"
+      # {{end}}
+      # {{with secret `secret/webgateway` }}
+      GENVID_WEBGATEWAY_SECRET = "{{ .Data.GENVID_WEBGATEWAY_SECRET }}"
+      # {{end}}
+	  PORT = "${NOMAD_PORT_web}"
+	}
+
+	resources {
+	  network {
+		mbits = 5
+		port "web" {
+		  # {{if (env `GENVID_STATIC_BINDING` | parseBool)}}
+		  static = 3000
+		  # {{end}}
+		}
+	  }
+	}
+
+	service {
+	  name = "web"
+	  tags = ["engage", "web"]
+	  port = "web"
+
+	  check {
+		type     = "http"
+		path     = "/"
+		interval = "5s"
+		timeout  = "2s"
+	  }
+	}
+  }
+}
