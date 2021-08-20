@@ -24,7 +24,8 @@ namespace Chess.Game {
 		}
 
 		public override void NotifyTurnToMove () {
-
+			// Genvid Hook
+			GenvidChessManager.Instance.StartVote();
 		}
 
 		public override void Update () {
