@@ -24,6 +24,7 @@ public class GenvidChessManager : MonoBehaviour
         "King",
         "Pawn",
         "Knight",
+        "",
         "Bishop",
         "Rook",
         "Queen"
@@ -75,10 +76,14 @@ public class GenvidChessManager : MonoBehaviour
 
             for (int i = 0; i < moves.Count; i++)
             {
+                Debug.Log($"i: {i}  moveIdentifiers.Length: {moveIdentifiers.Length}");
+                Debug.Log(moveIdentifiers);
+
                 int pieceType = Piece.PieceType(gameManager.board.Square[moves[i].StartSquare]);
+                string startSquare = BoardRepresentation.SquareNameFromIndex(moves[i].StartSquare);
 
                 moveIdentifiers[i] = new MoveIdentifier {
-                    Piece = pieceNames[pieceType],
+                    Piece = $"{pieceNames[pieceType]} ({startSquare})",
                     MoveName = moves[i].Name
                 };
             }
