@@ -374,6 +374,7 @@ namespace unityTankSample {
                 const moves = JSON.parse(genvid.UTF8ToString(frameSource.annotations.voteStart[0].rawdata));
 
                 this.legalMoves = moves.LegalMoves;
+                $("#pieces_select").empty();
                 
                 // We keep the start square here to make sure we don't add duplicates.
                 let duplicateList = [];
