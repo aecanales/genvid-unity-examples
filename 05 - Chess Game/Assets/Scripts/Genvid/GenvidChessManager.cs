@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Chess;
 using Chess.Game;
+using TMPro;
 
 // Handles all aspects related to the sending and recieving information to the Genvid stream.
 public class GenvidChessManager : MonoBehaviour
@@ -11,12 +12,12 @@ public class GenvidChessManager : MonoBehaviour
     // We use a unique public static instance of this class to be able to access it from any script.
     public static GenvidChessManager Instance { get; private set; }
     
-    // Reference to the game manager so we can get the board and know the current state of the game.
-    public GameManager gameManager;
-    public GenvidVoteEventHandler voteEventHandler;
+    public GameManager GameManager;
+    public GenvidVoteEventHandler VoteEventHandler;
+    public TextMeshProUGUI TimerText;
     
     // Duration of the voting period in seconds.
-    public int voteDuration;
+    public int VoteDuration;
     private float voteTimer;
 
     private bool startMoveVote;
@@ -46,7 +47,7 @@ public class GenvidChessManager : MonoBehaviour
         if (voteTimer > 0)
         {
             voteTimer -= Time.deltaTime;
-            // update text
+            TimerText.text = (Mathf.Round(voteTimer * 10) / 10).ToString();
 
             if (voteTimer < 0)
             {
@@ -58,17 +59,17 @@ public class GenvidChessManager : MonoBehaviour
     public void StartVote()
     {
         startMoveVote = true;
-        voteTimer = voteDuration;
+        voteTimer = VoteDuration;
     }
 
     private void EndVote()
     {
         closeMoveVote = true;
         
-        string moveName = voteEventHandler.GetMostVotedMove();
+        string moveName = VoteEventHandler.GetMostVotedMove();
         
-        gameManager.WhitePlayer.ChooseMove(moveName);
-        voteEventHandler.ResetVoteCount();
+        GameManager.WhitePlayer.ChooseMove(moveName);
+        VoteEventHandler.ResetVoteCount();
     }
 
     // Since we can't directly serialize a array of structs, we make make a wrapper to hold the array of moves. 
@@ -96,13 +97,13 @@ public class GenvidChessManager : MonoBehaviour
         
         if (GenvidSessionManager.IsInitialized && GenvidSessionManager.Instance.enabled)
         {
-            List<Move> moves = moveGenerator.GenerateMoves(gameManager.board);
+            List<Move> moves = moveGenerator.GenerateMoves(GameManager.board);
             MoveIdentifier[] moveIdentifiers = new MoveIdentifier[moves.Count];
 
             for (int i = 0; i < moves.Count; i++)
             {
                 // probably want to extract this into a funciton
-                int pieceType = Piece.PieceType(gameManager.board.Square[moves[i].StartSquare]);
+                int pieceType = Piece.PieceType(GameManager.board.Square[moves[i].StartSquare]);
                 string startSquare = BoardRepresentation.SquareNameFromIndex(moves[i].StartSquare);
 
                 moveIdentifiers[i] = new MoveIdentifier {
