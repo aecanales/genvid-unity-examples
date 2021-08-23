@@ -156,41 +156,45 @@
                                             <!--
                                             <span id='lootDropTimer' class='topContainerTimer'>Next loot drop: 0 seconds</span>
                                             -->
+                                            
                                             <div id='voteInfoPanel'>
                                                 
+                                                <!--
                                                 <div class='elem'>
                                                     <span id='voteResultMine'>Rotation X: 0</span>
-                                                    <!--<span><button id='VoteMine'>Vote for Mine</button></span>-->
+                                                    <span><button id='VoteMine'>Vote for Mine</button></span>
                                                 </div>
 
                                                 <div class='elem'>
                                                     <span id='voteResultHealth'>Rotation Y: 0</span>
-                                                    <!--<span><button id='VoteHealth'>Vote for Health</button></span>-->
+                                                    <span><button id='VoteHealth'>Vote for Health</button></span>
                                                 </div>
 
                                                 
                                                 <div class='elem'>
                                                     <span id='voteResultMovement'>Rotation Z: 0</span>
-                                                    <!--<span><button id='VoteMovement'>Vote for Mobility</button></span>-->
+                                                    <span><button id='VoteMovement'>Vote for Mobility</button></span>
                                                 </div>
                                                 
 
                                                 <div class='elem'>
                                                     <span id='voteResultAttack'>Color R: 0</span>
-                                                    <!--<span><button id='VoteAttack'>Vote for Attack</button></span>-->
+                                                    <span><button id='VoteAttack'>Vote for Attack</button></span>
                                                 </div>
 
                                                 <div class='elem'>
                                                     <span id='voteResultShield'>Color G: 0</span>
-                                                    <!--<span><button id='VoteShield'>Vote for Shield</button></span>-->
+                                                    <span><button id='VoteShield'>Vote for Shield</button></span>
                                                 </div>
 
                                                 <div class='elem'>
                                                     <span id='colorB'>Color B: 0</span>
-                                                    <!--<span><button id='VoteShield'>Vote for Shield</button></span>-->
+                                                    <span><button id='VoteShield'>Vote for Shield</button></span>
                                                 </div>
+                                                -->
                                             </div>
                                         </div>
+                                        
 
                                         <div class="container nopadding">
                                             <div class="left" id="leftTankPanel"></div>
@@ -223,7 +227,23 @@
                             <div id="video_player"></div>
                         </div>
                     </div>
-                </div>               
+                    
+                    <div id="voting_active">
+                        <label for="pieces">Select a piece type:</label>
+                        <select name="pieces" id="pieces_select">
+                        </select>
+
+                        <label for="move">Choose a move:</label>
+                        <select name="move" id="move_select">
+                        </select>
+
+                        <button id="send_move_button">Send</button>
+                    </div>
+                    <div id="voting_idle">
+                        <p>Waiting for next vote...</p>
+                    </div>
+                                    
+                </div>             
             </div>
         </div>
     </div>

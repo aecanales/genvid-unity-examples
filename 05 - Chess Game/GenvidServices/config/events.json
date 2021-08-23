@@ -4,33 +4,20 @@
     "game": {
       "maps": [
         {
-          "id": "dropVote",
+          "id": "vote",
           "source": "userinput",
-          "where": {"key": ["dropVote"], "name": "<dropId>", "type": "number"},
-          "key": ["dropVote", "<dropId>"], "value": 1
-        },
-        {
-          "id": "cheer",
-          "source": "userinput",
-          "where": {"key": ["cheer"], "name": "<tankId>", "type": "number"},
-          "key": ["cheer", "<tankId>"], "value": 1
+          "where": {"key": ["vote"], "name": "<voteId>", "type": "string"},
+          "key": ["vote", "<voteId>"], "value": 1
         }
       ],
-      "reductions": [
+      "reductions": [ 
         {
-          "id": "dropVote",
-          "where": {"key": ["dropVote", "<dropId>"]},
-          "key": ["<dropId>"],
+          "id": "vote",
+          "where": {"key": ["vote", "<voteId>"]},
+          "key": ["<voteId>"],
           "value": ["$sum"],
           "period": 250
-        },
-        {
-          "id": "cheer",
-          "where": {"key": ["cheer", "<tankId>"]},
-          "key": ["<tankId>"],
-          "value": ["$sum"],
-          "period": 250
-        }     
+        }
       ]
     }
   }

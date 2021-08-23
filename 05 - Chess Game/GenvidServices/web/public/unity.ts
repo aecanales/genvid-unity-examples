@@ -4,6 +4,12 @@ import * as genvidMath from "genvid-math";
 
 namespace unityTankSample {
 
+    export interface ILegalMove {
+        Piece: string;
+        StartSquare: string;
+        MoveName: string;
+    }
+
     // ------------------------------------------------class/interface defines------------------------------------------------
     // Conversion from Json data into structure for a specific tank
     export interface ITankData {
@@ -82,6 +88,17 @@ namespace unityTankSample {
 
     // unityController used fo all the methods on the page
     export class UnityController {
+        // Chess
+        voteActiveDiv: HTMLDivElement;
+        voteIdleDiv: HTMLDivElement;
+
+        pieceSelect: HTMLSelectElement;
+        moveSelect: HTMLSelectElement;
+
+        legalMoves: ILegalMove[] = [];
+        
+        // End chess
+
         client: genvid.IGenvidClient;
         streamInfo: genvid.IStreamInfo;
         video_player: genvid.IVideoPlayer = null;
@@ -213,6 +230,34 @@ namespace unityTankSample {
 
         // Once the video player is ready, get ready the other component
         private on_video_player_ready(_elem: HTMLElement) {
+            // CHESS 
+            this.voteActiveDiv = <HTMLDivElement> document.querySelector("#voting_active");
+            this.voteIdleDiv = <HTMLDivElement> document.querySelector("#voting_idle");
+
+            this.pieceSelect = <HTMLSelectElement> document.querySelector("#pieces_select");
+            this.moveSelect = <HTMLSelectElement> document.querySelector("#move_select");
+
+            // When the player selects a piece we update the move selection appropiately.
+            this.pieceSelect.addEventListener('change', () => {
+                $("#move_select").empty();
+
+                this.legalMoves.forEach(move => {
+                    if (move.StartSquare == this.pieceSelect.value)
+                        this.moveSelect[this.moveSelect.length] 
+                            = new Option(move.MoveName, move.MoveName);
+                });
+            });
+
+            document.querySelector("#send_move_button").addEventListener('click', () => {
+                this.client.sendEventObject({'vote': this.moveSelect.value});
+                
+                this.voteActiveDiv.style.visibility = "hidden";
+                this.voteIdleDiv.style.visibility = "visible";
+            });
+
+            this.voteActiveDiv.style.visibility = "hidden";
+            // END CHESS
+            
             // variables init
             this.video_player = this.client.videoPlayer;
 
@@ -296,26 +341,6 @@ namespace unityTankSample {
                 this.onMute();
             }
 
-            /*
-            let mineButton = <HTMLButtonElement>document.querySelector("#VoteMine");
-            mineButton.addEventListener("click", (_event) => { this.onVote(0); }, false);
-
-            let healthButton = <HTMLButtonElement>document.querySelector("#VoteHealth");
-            healthButton.addEventListener("click", (_event) => { this.onVote(1); }, false);
-
-            let shieldButton = <HTMLButtonElement>document.querySelector("#VoteShield");
-            shieldButton.addEventListener("click", (_event) => { this.onVote(4); }, false);
-
-            let movementButton = <HTMLButtonElement>document.querySelector("#VoteMovement");
-            movementButton.addEventListener("click", (_event) => { this.onVote(3); }, false);
-
-            let attackButton = <HTMLButtonElement>document.querySelector("#VoteAttack");
-            attackButton.addEventListener("click", (_event) => { this.onVote(2); }, false);
-
-            let mapButton = <HTMLButtonElement>document.querySelector("#ToggleMap");
-            mapButton.addEventListener("click", (_event) => { this.onToggleMap(); }, false);
-            */
-
             // Initialize graphics stuff.
             this.genvidWebGL.clear();
             let gl = this.genvidWebGL.gl;
@@ -345,21 +370,24 @@ namespace unityTankSample {
 
         // ---------------------------------------------------------Enter frame section---------------------------------------------------------
         private on_new_frame(frameSource: genvid.IDataFrame) {
-            let cubeData = JSON.parse(frameSource.streams.Cube.data);
+            if (frameSource.annotations.voteStart && frameSource.annotations.voteStart.length != 0) {
+                const moves = JSON.parse(genvid.UTF8ToString(frameSource.annotations.voteStart[0].rawdata));
 
-            let rotationX: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMine");
-            let rotationY: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultHealth");
-            let rotationZ: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMovement");
-            let colorR: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultAttack");
-            let colorG: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultShield");
-            let colorB: HTMLElement = <HTMLDivElement>document.querySelector("#colorB");
-            
-            rotationX.textContent = "Rotation X: " + Math.round(cubeData.CubeRotationX);
-            rotationY.textContent = "Rotation Y: " + Math.round(cubeData.CubeRotationY);
-            rotationZ.textContent = "Rotation Z: " + Math.round(cubeData.CubeRotationZ);
-            colorR.textContent = "Color R: " + Math.round(cubeData.CubeColorR * 10) / 10;
-            colorG.textContent = "Color G: " + Math.round(cubeData.CubeColorG * 10) / 10;
-            colorB.textContent = "Color B: " + Math.round(cubeData.CubeColorB * 10) / 10;
+                this.legalMoves = moves.LegalMoves;
+                
+                // We keep the start square here to make sure we don't add duplicates.
+                let duplicateList = [];
+                this.legalMoves.forEach(piece => {
+                    if (duplicateList.indexOf(piece.StartSquare) == -1) {
+                        duplicateList[duplicateList.length] = piece.StartSquare;
+                        this.pieceSelect.options[this.pieceSelect.options.length] 
+                            = new Option(`${piece.StartSquare} (${piece.Piece})`, piece.StartSquare);
+                    }
+                });
+                
+                this.voteActiveDiv.style.visibility = "visible";
+                this.voteIdleDiv.style.visibility = "hidden";
+            }
 
             let gameDataFrame = frameSource.streams["GameData"];
             let gameData: IGameData = null;            

@@ -35,6 +35,15 @@ namespace Chess.Game {
 		List<Move> gameMoves;
 		BoardUI boardUI;
 
+		// Genvid hook to be able to get player
+		public HumanPlayer WhitePlayer
+		{ 
+			get
+			{
+				return whitePlayer as HumanPlayer;
+			} 
+		}
+
 		public ulong zobristDebug;
 		public Board board { get; private set; }
 		Board searchBoard; // Duplicate version of board used for ai search

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-using System.Collections;
 using System.Collections.Generic;
 
 using Chess;
@@ -14,6 +13,11 @@ public class GenvidChessManager : MonoBehaviour
     
     // Reference to the game manager so we can get the board and know the current state of the game.
     public GameManager gameManager;
+    public GenvidVoteEventHandler voteEventHandler;
+    
+    // Duration of the voting period in seconds.
+    public int voteDuration;
+    private float voteTimer;
 
     private bool startMoveVote;
     private bool closeMoveVote;
@@ -39,12 +43,32 @@ public class GenvidChessManager : MonoBehaviour
 
     void Update()
     {
+        if (voteTimer > 0)
+        {
+            voteTimer -= Time.deltaTime;
+            // update text
 
+            if (voteTimer < 0)
+            {
+                EndVote();
+            }
+        }
     }
 
     public void StartVote()
     {
         startMoveVote = true;
+        voteTimer = voteDuration;
+    }
+
+    private void EndVote()
+    {
+        closeMoveVote = true;
+        
+        string moveName = voteEventHandler.GetMostVotedMove();
+        
+        gameManager.WhitePlayer.ChooseMove(moveName);
+        voteEventHandler.ResetVoteCount();
     }
 
     // Since we can't directly serialize a array of structs, we make make a wrapper to hold the array of moves. 
@@ -57,8 +81,9 @@ public class GenvidChessManager : MonoBehaviour
     [System.Serializable]
     public struct MoveIdentifier
     {
-        public string Piece;    // Name of the piece.
-        public string MoveName; // Move in x0-x0 format.
+        public string Piece;       // Name of the piece.
+        public string StartSquare; // Current square of the piece in x0 format.
+        public string MoveName;    // Move in x0-x0 format.
     }
     
     // We open the vote whenever it's the white player's turn. 
@@ -76,14 +101,13 @@ public class GenvidChessManager : MonoBehaviour
 
             for (int i = 0; i < moves.Count; i++)
             {
-                Debug.Log($"i: {i}  moveIdentifiers.Length: {moveIdentifiers.Length}");
-                Debug.Log(moveIdentifiers);
-
+                // probably want to extract this into a funciton
                 int pieceType = Piece.PieceType(gameManager.board.Square[moves[i].StartSquare]);
                 string startSquare = BoardRepresentation.SquareNameFromIndex(moves[i].StartSquare);
 
                 moveIdentifiers[i] = new MoveIdentifier {
-                    Piece = $"{pieceNames[pieceType]} ({startSquare})",
+                    Piece = pieceNames[pieceType],
+                    StartSquare = startSquare,
                     MoveName = moves[i].Name
                 };
             }
@@ -108,7 +132,7 @@ public class GenvidChessManager : MonoBehaviour
             // As we don't care about the content we just send an empty move identifier.
             GenvidSessionManager.Instance.Session.Streams.SubmitAnnotationJSON(streamId, new MoveIdentifier());
 
-            closeMoveVote = true;
+            closeMoveVote = false;
         }
     }
 }

@@ -133,6 +133,32 @@ namespace Chess.Game {
 			}
 		}
 
+		// Wrapper for Genvid to be able to access ChoseMove
+		public void ChooseMove(string moveName)
+		{
+			// We loop through all posible moves and find the one with the same name as the passed parameter.
+			// It's a lazy solution but it's basically what they do above!
+			MoveGenerator moveGenerator = new MoveGenerator();
+			List<Move> moves = moveGenerator.GenerateMoves(board);
+
+			// If no move was voted, the player does a random move.
+			if (moveName == "")
+			{
+				ChoseMove(moves[Random.Range(0, moves.Count)]);
+			}
+			else
+			{
+				foreach(Move move in moves)
+				{
+					if (move.Name == moveName)
+					{
+						ChoseMove(move);
+						break;
+					}
+				}
+			}
+		}
+
 		void HandlePieceSelection (Vector2 mousePos) {
 			if (Input.GetMouseButtonDown (0)) {
 				if (boardUI.TryGetSquareUnderMouse (mousePos, out selectedPieceSquare)) {
