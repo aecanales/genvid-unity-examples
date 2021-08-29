@@ -70,7 +70,7 @@ public class GenvidChessManager : MonoBehaviour
         
         string moveName = VoteEventHandler.GetMostVotedMove();
         
-        // If no vote has been cast we restart the vote.
+        // If no vote has been cast (empty string) we restart the vote.
         if (moveName == "")
         {
             StartCoroutine(restartVote());
@@ -118,28 +118,32 @@ public class GenvidChessManager : MonoBehaviour
         
         if (GenvidSessionManager.IsInitialized && GenvidSessionManager.Instance.enabled)
         {
-            List<Move> moves = moveGenerator.GenerateMoves(GameManager.board);
-            MoveIdentifier[] moveIdentifiers = new MoveIdentifier[moves.Count];
-
-            for (int i = 0; i < moves.Count; i++)
-            {
-                // probably want to extract this into a funciton
-                int pieceType = Piece.PieceType(GameManager.board.Square[moves[i].StartSquare]);
-                string startSquare = BoardRepresentation.SquareNameFromIndex(moves[i].StartSquare);
-
-                moveIdentifiers[i] = new MoveIdentifier {
-                    Piece = pieceNames[pieceType],
-                    StartSquare = startSquare,
-                    MoveName = moves[i].Name
-                };
-            }
-
-            MoveList moveList = new MoveList { LegalMoves = moveIdentifiers };
+            MoveList moveList = new MoveList { LegalMoves = getValidMoveIdentifierArray() };
 
             GenvidSessionManager.Instance.Session.Streams.SubmitAnnotationJSON(streamId, moveList);
 
             startMoveVote = false;
         }
+    }
+
+    private MoveIdentifier[] getValidMoveIdentifierArray()
+    {
+        List<Move> moves = moveGenerator.GenerateMoves(GameManager.board);
+        MoveIdentifier[] moveIdentifiers = new MoveIdentifier[moves.Count];
+
+        for (int i = 0; i < moves.Count; i++)
+        {
+            int pieceType = Piece.PieceType(GameManager.board.Square[moves[i].StartSquare]);
+            string startSquare = BoardRepresentation.SquareNameFromIndex(moves[i].StartSquare);
+
+            moveIdentifiers[i] = new MoveIdentifier {
+                Piece = pieceNames[pieceType],
+                StartSquare = startSquare,
+                MoveName = moves[i].Name
+            };
+        }
+
+        return moveIdentifiers;
     }
 
     // After the voting period has finished the vote will close and the most voted move will be executed.

@@ -141,20 +141,12 @@ namespace Chess.Game {
 			MoveGenerator moveGenerator = new MoveGenerator();
 			List<Move> moves = moveGenerator.GenerateMoves(board);
 
-			// If no move was voted, the player does a random move.
-			if (moveName == "")
+			foreach(Move move in moves)
 			{
-				ChoseMove(moves[Random.Range(0, moves.Count)]);
-			}
-			else
-			{
-				foreach(Move move in moves)
+				if (move.Name == moveName)
 				{
-					if (move.Name == moveName)
-					{
-						ChoseMove(move);
-						break;
-					}
+					ChoseMove(move);
+					break;
 				}
 			}
 		}
