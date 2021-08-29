@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using System.Collections;
 using System.Collections.Generic;
 
 using Chess;
@@ -15,6 +16,7 @@ public class GenvidChessManager : MonoBehaviour
     public GameManager GameManager;
     public GenvidVoteEventHandler VoteEventHandler;
     public TextMeshProUGUI TimerText;
+    public TextMeshProUGUI RestartText;
     
     // Duration of the voting period in seconds.
     public int VoteDuration;
@@ -47,11 +49,11 @@ public class GenvidChessManager : MonoBehaviour
         if (voteTimer > 0)
         {
             voteTimer -= Time.deltaTime;
-            TimerText.text = (Mathf.Round(voteTimer * 10) / 10).ToString();
+            TimerText.text = voteTimer.ToString("F");
 
             if (voteTimer < 0)
             {
-                EndVote();
+                endVote();
             }
         }
     }
@@ -62,14 +64,33 @@ public class GenvidChessManager : MonoBehaviour
         voteTimer = VoteDuration;
     }
 
-    private void EndVote()
+    private void endVote()
     {
         closeMoveVote = true;
         
         string moveName = VoteEventHandler.GetMostVotedMove();
         
-        GameManager.WhitePlayer.ChooseMove(moveName);
-        VoteEventHandler.ResetVoteCount();
+        // If no vote has been cast we restart the vote.
+        if (moveName == "")
+        {
+            StartCoroutine(restartVote());
+        }
+        else
+        {
+            GameManager.WhitePlayer.ChooseMove(moveName);
+            VoteEventHandler.ResetVoteCount();
+        }
+    }
+
+    private IEnumerator restartVote()
+    {
+        RestartText.gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(5);
+
+        StartVote();
+
+        RestartText.gameObject.SetActive(false);
     }
 
     // Since we can't directly serialize a array of structs, we make make a wrapper to hold the array of moves. 
@@ -121,8 +142,7 @@ public class GenvidChessManager : MonoBehaviour
         }
     }
 
-    // After the voting period has finished the vote will close and the most voted turn will be executed.
-    // INTERESTING CASE (VOTES IGNORED)
+    // After the voting period has finished the vote will close and the most voted move will be executed.
     public void SubmitVoteClosedAnnotation(string streamId)
     {
         if (!closeMoveVote)
@@ -130,7 +150,7 @@ public class GenvidChessManager : MonoBehaviour
 
         if (GenvidSessionManager.IsInitialized && GenvidSessionManager.Instance.enabled)
         {
-            // As we don't care about the content we just send an empty move identifier.
+            // As we don't care about the content, just the existence of the annotation, we just send an empty move identifier.
             GenvidSessionManager.Instance.Session.Streams.SubmitAnnotationJSON(streamId, new MoveIdentifier());
 
             closeMoveVote = false;

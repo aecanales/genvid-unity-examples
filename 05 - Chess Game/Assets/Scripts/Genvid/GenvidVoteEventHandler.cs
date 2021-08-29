@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using GenvidSDKCSharp;
 
-// Recieves the event when a player clicks on a bug and deactivates the corresponding bug.
+// Handles recieving and tallying the votes cast by players for the different moves.
 public class GenvidVoteEventHandler : MonoBehaviour 
 {
     // Holds the votes for the current move in a <move, votes> format.
