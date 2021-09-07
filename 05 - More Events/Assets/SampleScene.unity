@@ -984,6 +984,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].Id
+      value: click
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2055721750}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TreeEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+      propertyPath: Ids.Array.data[0].OnEventTriggered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
 --- !u!114 &169157999 stripped
@@ -991,7 +1027,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114820462039279226, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
   m_PrefabInstance: {fileID: 169157998}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2055721749}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 863f108033eca074392da08683d99456, type: 3}
@@ -3071,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 875465701}
     - target: {fileID: 114173052960610352, guid: 101470908697ddd4b990d38f78a6977b, type: 3}
       propertyPath: ActivateDebugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 101470908697ddd4b990d38f78a6977b, type: 3}
@@ -10918,6 +10954,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1829973789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829973790}
+  m_Layer: 0
+  m_Name: TreeContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1829973790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829973789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836243987
 GameObject:
   m_ObjectHideFlags: 0
@@ -11992,6 +12058,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2055721749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1930838573799504, guid: 2768084eec4fb774c8c95d381816c1e4, type: 3}
+  m_PrefabInstance: {fileID: 169157998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055721750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055721749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2127fb1d8467ba6418c48501739ed82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TreeContainer: {fileID: 1829973789}
+  TreePrefab: {fileID: 5185087706575098799, guid: 9c79f32c6f3e1a848a705db02a0fa971, type: 3}
 --- !u!1 &2084788802
 GameObject:
   m_ObjectHideFlags: 0
