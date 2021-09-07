@@ -296,6 +296,16 @@ namespace unityTankSample {
                 this.onMute();
             }
 
+            const relativeClickPosition = (click) => {
+                const rect = this.mouseOverlay.getBoundingClientRect();
+                return {X: click.pageX - rect.x, Y: click.pageY - rect.y}                
+            }
+
+            this.mouseOverlay.addEventListener("click", (event) => {
+                const clickObject = relativeClickPosition(event);
+                this.client.sendEventObject({'click': `${clickObject.X},${clickObject.Y}`});
+            });
+
             /*
             let mineButton = <HTMLButtonElement>document.querySelector("#VoteMine");
             mineButton.addEventListener("click", (_event) => { this.onVote(0); }, false);
@@ -345,22 +355,6 @@ namespace unityTankSample {
 
         // ---------------------------------------------------------Enter frame section---------------------------------------------------------
         private on_new_frame(frameSource: genvid.IDataFrame) {
-            let cubeData = JSON.parse(frameSource.streams.Cube.data);
-
-            let rotationX: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMine");
-            let rotationY: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultHealth");
-            let rotationZ: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultMovement");
-            let colorR: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultAttack");
-            let colorG: HTMLElement = <HTMLDivElement>document.querySelector("#voteResultShield");
-            let colorB: HTMLElement = <HTMLDivElement>document.querySelector("#colorB");
-            
-            rotationX.textContent = "Rotation X: " + Math.round(cubeData.CubeRotationX);
-            rotationY.textContent = "Rotation Y: " + Math.round(cubeData.CubeRotationY);
-            rotationZ.textContent = "Rotation Z: " + Math.round(cubeData.CubeRotationZ);
-            colorR.textContent = "Color R: " + Math.round(cubeData.CubeColorR * 10) / 10;
-            colorG.textContent = "Color G: " + Math.round(cubeData.CubeColorG * 10) / 10;
-            colorB.textContent = "Color B: " + Math.round(cubeData.CubeColorB * 10) / 10;
-
             let gameDataFrame = frameSource.streams["GameData"];
             let gameData: IGameData = null;            
             if (gameDataFrame && gameDataFrame.user) {
