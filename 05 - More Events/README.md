@@ -1,11 +1,26 @@
-# 01 - Data Streams
-Basic examples that contains a rotating cube. Demostrates how to set up a scene and send data about the cube to a Genvid stream via data streams, to then display them in web view.
+# 04 - Events
+Basic example that shows how to send player input from the web view to the game via events. Clicking on the web view will plant a tree on the clicked location. 
 
-![Data Stream example](../img/01.gif)
+![Event examples](../img/04.gif)
+
+## Relevant Configuration Files
+* **GenvidServices/config/events.json:** Contains the definition of event we send from the web view to the game.
 
 ## Important Files
-* **SampleScene:** Basic scene that contains a Unity primitive cube with the `Cube.cs` component. The "GenvidSessionManager" prefab has also been added and correctly set-up. The "GenvidStreams" child object has been configured to send a data stream named "Cube" as defined in the `DataStream.cs` component.
-* **Cube.cs:** Basic script that rotates the cube and changes it's color.
-* **DataStream.cs:** Script that handles sending the data (in this case, the cube's color components and rotation in euler angles). 
+* **SampleScene:** Scene with simple tiled background a "GenvidSessionManager" prefab added and correctly set-up. The "GenvidEvents" child object has been configured to handle a event named "click" as defined in the `TreeEvent.cs` component.
+* **TreeEvent.cs:** Script that recieves the click event and creates the tree at the correct location.
 
-*Description of website files coming soon...*
+## Relevant Web View Code
+We recieve the click event and send it to Unity via ` this.client.sendEventObject()`.
+```typescript
+// Returns the click relative to the mouseOverlay div (instead of relative to the entire DOM).
+const relativeClickPosition = (click) => {
+    const rect = this.mouseOverlay.getBoundingClientRect();
+    return {X: click.pageX - rect.x, Y: click.pageY - rect.y}                
+}
+
+this.mouseOverlay.addEventListener("click", (event) => {
+    const clickObject = relativeClickPosition(event);
+    this.client.sendEventObject({'click': `${clickObject.X},${clickObject.Y}`});
+});
+```

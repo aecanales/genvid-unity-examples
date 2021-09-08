@@ -20,9 +20,13 @@ Example showing how to use annotations and notifications and illustrates the dif
 
 ![Annotations and Notifications example](./img/03.gif)
 
-### 04 - Events and Commands
+### 04 - Events
+Basic example that shows how to send player input from the web view to the game via events. Clicking on the web view will plant a tree on the clicked location. 
+![Events example](./img/04.gif)
+
+### 05 - Events and Commands
 Example that shows how to send player input from the web view to the game via events and commands.
-![Events and Commands example](./img/04.gif)
+![Events and Commands example](./img/05.gif)
 
 ### 06 - Chess Game
 Complex example that shows a chess game against an AI where players can vote for the moves White will execute. Built upon [SebLague's Chess AI](https://github.com/SebLague/Chess-AI) for Unity.

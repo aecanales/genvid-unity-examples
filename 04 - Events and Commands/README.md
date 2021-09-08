@@ -1,9 +1,9 @@
-# 04 - Events and Commands
-Example that shows how to send player input from the web view to the game via events and commands. Clicking on a bug will destroy it and the game can be restarted by pressing the corresponding button. When asked for credentials, use "admin" without quotes for both the username and password.
+# 05 - Events and Commands
+Example that shows how to handle player input in a more complex case and how to use commands. Clicking on a bug will destroy it and the game can be restarted by pressing the corresponding button. When asked for credentials, use "admin" without quotes for both the username and password.
 
 Events are optimised for **input that will be sent by many players** such as votes or clicks. This works thanks to a map-reduce algorithm that groups similar inputs and thus reduces the strain on the server hosting the game. On the other hand, commands are not optimized and thus are best reserved for **input only a few users will be able to access** such as administrator controls.
 
-![Events and Commands example](../img/04.gif)
+![Events and Commands example](../img/05.gif)
 
 ## Relevant Configuration Files
 * **GenvidServices/config/events.json:** Contains the definition of event we send from the web view to the game.
